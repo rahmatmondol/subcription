@@ -1,0 +1,20 @@
+
+.boxes .box.active img {
+    border: 2px solid #2d3342;
+    border-radius: 8px;
+    box-shadow: -3px 3px 8px 0px #00000052;
+}
+.boxes .box {
+    cursor: pointer;
+}
+
+.boxes .box.disabled {
+    opacity: 0.5;
+    cursor: no-drop;
+    z-index: -1;
+}
+
+#active-selected-boxes.disabled {
+    position: relative;
+    z-index: -2;
+  }
