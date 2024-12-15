@@ -28,8 +28,5 @@ add_action( 'wp_enqueue_scripts', 'subcription_manager_assets' );
 include( __DIR__ . '/inc/shortcodes/subcription_select_box.php' );
 include( __DIR__ . '/inc/functions/get_subcription_info.php' );
 include( __DIR__ . '/inc/functions/wc_account_functions.php' );
-
-
-
-
-
+include( __DIR__ . '/inc/functions/check_status.php' );
+include( __DIR__ . '/inc/ajax/save_selected_boxes.php' );
