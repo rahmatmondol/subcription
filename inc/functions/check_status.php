@@ -3,6 +3,13 @@
 function display_single_post_id_in_header() {
     // Check if the user is logged in
     if ( is_user_logged_in() ) {
+
+        // Check if user is admintrator
+        $user = wp_get_current_user();
+        if ( in_array( 'administrator', $user->roles ) ) {
+            return;
+        }
+
         if ( is_single() && get_post_type() === 'box') {
             $subcription = get_user_subscriptions();
             $user = wp_get_current_user();

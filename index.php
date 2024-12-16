@@ -3,7 +3,7 @@
 Plugin Name: Subcription Manager
 Plugin URI: 
 Description: Subcription Manager Plugin
-Version: 1.0
+Version: 1.1
 Author: Rahmat Mondol
 Author URI: www.rahmatmondol.com
 */
