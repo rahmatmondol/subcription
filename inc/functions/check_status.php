@@ -1,42 +1,62 @@
 <?php 
-// Function to display the current post ID in the header
 function display_single_post_id_in_header() {
-    // Check if the user is logged in
-    if ( is_user_logged_in() ) {
+    // Check if the current page is a single post of post type 'box'
+    if ( is_single() && get_post_type() === 'box' ) {
+        // Check if the user is logged in
+        if ( ! is_user_logged_in() ) {
+            // Display a permission error message and exit
+            wp_die(
+                __( 'You do not have permission to view this page.', 'subscription-Manager' ),
+                __( 'Access Denied', 'subscription-Manager' ),
+                array( 'response' => 403 )
+            );
+        }
 
-        // Check if user is admintrator
+        // Get the current user
         $user = wp_get_current_user();
-        if ( in_array( 'administrator', $user->roles ) ) {
+
+        // Skip for administrators
+        if ( in_array( 'administrator', (array) $user->roles, true ) ) {
             return;
         }
 
-        if ( is_single() && get_post_type() === 'box') {
-            $subcription = get_user_subscriptions();
-            $user = wp_get_current_user();
-            $user_boxes = json_decode( get_user_meta( $user->ID, 'active_boxes', true ), true ) ?: array();
+        // Fetch user subscription details
+        $subscription = get_user_subscriptions(); // Assuming this function returns subscription details
+        $user_boxes = json_decode( get_user_meta( $user->ID, 'active_boxes', true ), true ) ?: array();
 
-            if(!$subcription){
-                wp_redirect( get_permalink( wc_get_page_id( 'myaccount' ) ) . 'select-boxe' );
-                exit;
-            }elseif($subcription->status === 'cancelled'){
-                wp_redirect( get_permalink( wc_get_page_id( 'myaccount' ) ) . 'select-boxe' );
-                delete_user_meta( $user->ID, 'active_boxes' );
-                exit;
-            }
-
-            // Check if the current post ID is in the user's boxes
-            $post_id = get_the_ID();
-            if (!in_array($post_id, $user_boxes)) {
-                // redirect to my account page
-                wp_safe_redirect( get_permalink( wc_get_page_id( 'myaccount' ) ) . 'select-boxe' );
-                exit;
-            }
+        // Handle no subscription
+        if ( ! $subscription ) {
+            wp_die(
+                __( 'You do not have an active subscription.', 'subscription-Manager' ),
+                __( 'Access Denied', 'subscription-Manager' ),
+                array( 'response' => 403 )
+            );
         }
-    }else{
-        wp_redirect( wp_login_url() );
-    }
 
+        // Handle cancelled subscription
+        if ( $subscription->status === 'cancelled' ) {
+            if($user_boxes){
+                update_user_meta( $user->ID, 'active_boxes', $user_boxes );
+            }
+            wp_die(
+                __( 'Your subscription has been cancelled.', 'subscription-Manager' ),
+                __( 'Access Denied', 'subscription-Manager' ),
+                array( 'response' => 403 )
+            );
+        }
+
+        // Check if the current post ID is in the user's active boxes
+        $post_id = get_the_ID();
+        if ( ! in_array( $post_id, $user_boxes, true ) ) {
+            wp_die(
+                __( 'You do not have access to this box.', 'subscription-Manager' ),
+                __( 'Access Denied', 'subscription-Manager' ),
+                array( 'response' => 403 )
+            );
+            exit;
+        }
+    }
 }
 
 // Hook the function to the wp_head action
-add_action('wp_head', 'display_single_post_id_in_header');
+add_action( 'wp_head', 'display_single_post_id_in_header' );

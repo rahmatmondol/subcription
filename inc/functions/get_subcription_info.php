@@ -3,13 +3,17 @@
  function get_user_subscriptions( ) {
     $user = wp_get_current_user();
     $args = array(
-        'customer' => $user->Id,
-        'post_status' => 'any', // Optional: can filter by order status (e.g., 'completed', 'processing')
-        'posts_per_page' => -1, // Retrieve all orders
+        'customer_id'   => $user->ID, // Use 'customer_id' to specify the user
+        'post_status'   => 'any',           // Optional: Filter by order status
+        'posts_per_page' => -1,             // Retrieve all orders
     );
     
     $orders = wc_get_orders( $args );
 
+    if( empty( $orders ) ) {
+        return false;
+    }
+    
     $wps_subscriptions_data[] = array();
     foreach ( $orders as $order ) {
         $order_id = $order->get_id();

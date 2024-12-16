@@ -1,13 +1,8 @@
 <?php
 // Add "Select Box" tab to the My Account menu
 function add_user_details_tab( $menu_links ) {
-    // Add the new tab before "Logout"
-    $new_links = array( 'select-boxe' => __( 'Select Box', 'woocommerce' ) );
-
     // Insert the new tab in the menu
-    $menu_links = array_slice( $menu_links, 0, count( $menu_links ) - 1, true ) 
-                + $new_links 
-                + array_slice( $menu_links, count( $menu_links ) - 1, null, true );
+    $menu_links = array_merge( array( 'select-boxe' => __( 'Select Box', 'subscription-Manager' ) ), $menu_links );
 
     return $menu_links;
 }

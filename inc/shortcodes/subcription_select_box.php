@@ -11,8 +11,8 @@ function subcription_select_box() {
        
         <?php if($subcription): ?>
             <div class="box-container">
-                    <h2 class="text-center mb-1"><?php esc_html_e( 'Package', 'subscription' ); ?>:<span><?php echo $subcription->product_name ?></span></h2>
-                    <p class="text-center mb-1"><?php esc_html_e( 'Choose '.$subcription->limit.' box for your subscription', 'subscription' ); ?></p>
+                    <h2 class="text-center mb-1"><?php esc_html_e( 'Package', 'subscription-Manager' ); ?>:<span><?php echo $subcription->product_name ?></span></h2>
+                    <p class="text-center mb-1"><?php esc_html_e( 'Choose '.$subcription->limit.' box for your subscription', 'subscription-Manager' ); ?></p>
                     <input type="hidden" id="limit" value="<?php echo $subcription->limit ?>">
                     <input type="hidden" id="status" value="<?php echo $subcription->status ?>">
                 <?php if($user_boxes): ?>
@@ -37,15 +37,15 @@ function subcription_select_box() {
                     </div>
                     <div class="selected-boxes text-center mt-3">
                         <div class="" id="selected-boxes"></div>
-                        <button class="btn disabled" id="active-selected-boxes">Active Selected Boxes</button>
+                        <button class="btn disabled" id="active-selected-boxes"><?php esc_html_e( 'Active Selected Boxes', 'subscription-Manager' ); ?></button>
                     </div>
             <?php endif; ?>
             </div>
         <?php else : ?>
             <div class="no-package">
-                <h2 class="text-center"><?php esc_html_e( 'You dont have any subscription', 'subscription' ); ?></h2>
-                <p class=""><?php esc_html_e( 'Please select a package', 'subscription' ); ?></p>
-                <a href="<?php echo esc_url( wc_get_account_endpoint_url( 'select-boxe' ) ); ?>">Select Package</a>
+                <h2 class="text-center"><?php esc_html_e( 'You dont have any subscription', 'subscription-Manager' ); ?></h2>
+                <p class=""><?php esc_html_e( 'Please select a package', 'subscription-Manager' ); ?></p>
+                <a href="<?php echo esc_url( wc_get_account_endpoint_url( 'select-boxe' ) ); ?>"><?php esc_html_e( 'Select a package', 'subscription-Manager' ); ?></a>
             </div>
             
         <?php endif; ?>

@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Subcription Manager
+Plugin Name: Subscription Manager
 Plugin URI: 
-Description: Subcription Manager Plugin
-Version: 1.1
-Author: Rahmat Mondol
-Author URI: www.rahmatmondol.com
+Description: This plugin is for Subscription Boxes management system
+Version: 1.2 
+Author: Leadcom
+Author URI: http://leadcom.io
 */
 
 // add stylesheets
