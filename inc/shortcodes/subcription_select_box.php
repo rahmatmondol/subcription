@@ -11,17 +11,17 @@ function subcription_select_box() {
        
         <?php if($subcription): ?>
             <div class="box-container">
-                    <h2 class="text-center mb-1"><?php esc_html_e( 'Package', 'subscription-Manager' ); ?>:<span><?php echo $subcription->product_name ?></span></h2>
-                    <p class="text-center mb-1"><?php esc_html_e( 'Choose '.$subcription->limit.' box for your subscription', 'subscription-Manager' ); ?></p>
+                    <h2 class="text-center mb-1"><?php esc_html_e( 'Paket', 'subscription-Manager' ); ?>:<span><?php echo $subcription->product_name ?></span></h2>
+                    <p class="text-center mb-1"><?php esc_html_e( 'Välj '.$subcription->limit.' box', 'subscription-Manager' ); ?></p>
                     <input type="hidden" id="limit" value="<?php echo $subcription->limit ?>">
                     <input type="hidden" id="status" value="<?php echo $subcription->status ?>">
                 <?php if($user_boxes): ?>
                     <div class="boxes row">
-                        <?php foreach ( $subcription->boxes as $box_post ): ?>
-                            <?php if ( in_array( $box_post->ID, $user_boxes ) ) : ?>
-                                <div class="selected-box col-md-4 p-2 <?php echo $subcription->status !== 'cancelled' ? 'disabled' : '' ?>" data-id="<?php echo esc_attr( $box_post->ID ); ?>" data-name="<?php echo esc_attr( $box_post->post_title ); ?>">
-                                    <a href="<?php echo esc_url( get_the_permalink( $box_post->ID ) ); ?>" target="_blank">
-                                        <img src="<?php echo esc_url( get_the_post_thumbnail_url( $box_post->ID, 'full' ) ); ?>" alt="<?php echo esc_attr( $box_post->post_title ); ?>">
+                        <?php foreach ( $subcription->boxes as $box_id ): ?>
+                            <?php if ( in_array( $box_id, $user_boxes ) ) : ?>
+                                <div class="selected-box col-md-4 p-2 <?php echo $subcription->status !== 'cancelled' ? 'disabled' : '' ?>" data-id="<?php echo esc_attr( $box_id ); ?>" data-name="<?php echo get_the_title( $box_id ); ?>">
+                                    <a href="<?php echo esc_url( get_the_permalink( $box_id ) ); ?>" target="_blank">
+                                        <img src="<?php echo esc_url( get_the_post_thumbnail_url( $box_id, 'full' ) ); ?>" alt="<?php echo get_the_title( $box_id ); ?>">
                                     </a>
                                 </div>
                             <?php endif; ?>
@@ -29,29 +29,28 @@ function subcription_select_box() {
                     </div>
                 <?php else : ?>
                     <div class="boxes row">
-                        <?php foreach ( $subcription->boxes as $box_post ): ?>
-                            <div class="box col-md-4 p-2 <?php echo $subcription->status == 'cancelled' ? 'disabled' : '' ?>" data-id="<?php echo esc_attr( $box_post->ID ); ?>" data-name="<?php echo esc_attr( $box_post->post_title ); ?>">
-                                <img src="<?php echo esc_url( get_the_post_thumbnail_url( $box_post->ID, 'full' ) ); ?>" alt="<?php echo esc_attr( $box_post->post_title ); ?>">
+                        <?php foreach ( $subcription->boxes as $box_id ): ?>
+                            <div class="box col-md-4 p-2 <?php echo $subcription->status == 'cancelled' ? 'disabled' : '' ?>" data-id="<?php echo esc_attr( $box_id ); ?>" data-name="<?php echo get_the_title( $box_id ); ?>">
+                                <img src="<?php echo esc_url( get_the_post_thumbnail_url( $box_id, 'full' ) ); ?>" alt="<?php echo get_the_title( $box_id ); ?>">
                             </div>
                         <?php endforeach; ?>
                     </div>
                     <div class="selected-boxes text-center mt-3">
                         <div class="" id="selected-boxes"></div>
-                        <button class="btn disabled" id="active-selected-boxes"><?php esc_html_e( 'Active Selected Boxes', 'subscription-Manager' ); ?></button>
+                        <button class="btn disabled" id="active-selected-boxes"><?php esc_html_e( 'Gå vidare', 'subscription-Manager' ); ?></button>
                     </div>
             <?php endif; ?>
             </div>
         <?php else : ?>
             <div class="no-package">
-                <h2 class="text-center"><?php esc_html_e( 'You dont have any subscription', 'subscription-Manager' ); ?></h2>
-                <p class=""><?php esc_html_e( 'Please select a package', 'subscription-Manager' ); ?></p>
-                <a href="<?php echo esc_url( wc_get_account_endpoint_url( 'select-boxe' ) ); ?>"><?php esc_html_e( 'Select a package', 'subscription-Manager' ); ?></a>
+                <h2 class="text-center"><?php esc_html_e( 'Du har inte någon prenumeration', 'subscription-Manager' ); ?></h2>
+                <p class=""><?php esc_html_e( 'Vänligen välj ett paket', 'subscription-Manager' ); ?></p>
             </div>
             
         <?php endif; ?>
-        <!-- <pre>
-            <?php print_r($user_boxes); ?>
-        </pre> -->
+
+       
+
     </div>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 

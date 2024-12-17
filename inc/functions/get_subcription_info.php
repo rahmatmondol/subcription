@@ -9,15 +9,24 @@
     );
     
     $orders = wc_get_orders( $args );
+    
 
     if( empty( $orders ) ) {
         return false;
     }
+
+    
     
     $wps_subscriptions_data[] = array();
     foreach ( $orders as $order ) {
         $order_id = $order->get_id();
-        $subcription_id = $order->get_meta('wps_subscription_id');
+        $subcription_id = $order->get_meta('wps_sfw_subscription');
+        
+        $wps_subscription_status = wps_sfw_get_meta_data( $subcription_id, 'wps_subscription_status', true );
+        
+        //for test only active subscription
+        // wps_sfw_update_meta_data($subcription_id, 'wps_subscription_status', 'active');
+        // return $order->meta_data;
 
         if ($subcription_id ) {
             $product_id   = wps_sfw_get_meta_data( $subcription_id, 'product_id', true );
@@ -37,6 +46,7 @@
 
             $limit = get_field('limit', $product_id);
             $boxes = get_field('boxes', $product_id);
+            $blogs = get_field('blogs', $product_id);
     
             $user_nicename = isset( $user->user_nicename ) ? $user->user_nicename : '';
             $wps_subscriptions_data= (object) [
@@ -53,11 +63,12 @@
                 'next_payment_date'         => wps_sfw_get_the_wordpress_date_format( $wps_next_payment_date ),
                 'subscriptions_expiry_date' => wps_sfw_get_the_wordpress_date_format( $wps_susbcription_end ),
                 'boxes'                     => $boxes,
+                'blogs'                     => $blogs
             ];
 
             return $wps_subscriptions_data;
         }else{
-            return false;
+            // return false;
         }
     }
 }

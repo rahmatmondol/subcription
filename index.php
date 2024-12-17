@@ -3,7 +3,7 @@
 Plugin Name: Subscription Manager
 Plugin URI: 
 Description: This plugin is for Subscription Boxes management system
-Version: 1.2 
+Version: 1.3 
 Author: Leadcom
 Author URI: http://leadcom.io
 */
@@ -32,7 +32,7 @@ if ( in_array( 'subscriptions-for-woocommerce/subscriptions-for-woocommerce.php'
     include( __DIR__ . '/inc/shortcodes/subcription_select_box.php' );
     include( __DIR__ . '/inc/functions/get_subcription_info.php' );
     include( __DIR__ . '/inc/functions/wc_account_functions.php' );
-    include( __DIR__ . '/inc/functions/check_status.php' );
+    include( __DIR__ . '/inc/functions/check_box_restriction.php' );
     include( __DIR__ . '/inc/ajax/save_selected_boxes.php' );
 } else {
     // Add admin notice to prompt activation of Subscriptions for WooCommerce

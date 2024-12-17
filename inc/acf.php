@@ -6,12 +6,12 @@ add_action( 'acf/include_fields', function() {
 
 	acf_add_local_field_group( array(
 	'key' => 'group_675b4923e73f4',
-	'title' => 'Boxar',
+	'title' => 'boxes',
 	'fields' => array(
 		array(
 			'key' => 'field_675b4926c876d',
-			'label' => 'Boxar',
-			'name' => 'Boxar',
+			'label' => 'boxes',
+			'name' => 'boxes',
 			'aria-label' => '',
 			'type' => 'relationship',
 			'instructions' => '',
@@ -30,7 +30,7 @@ add_action( 'acf/include_fields', function() {
 			),
 			'taxonomy' => '',
 			'filters' => '',
-			'return_format' => 'object',
+			'return_format' => 'id',
 			'min' => '',
 			'max' => '',
 			'allow_in_bindings' => 0,
@@ -62,6 +62,33 @@ add_action( 'acf/include_fields', function() {
 			'prepend' => '',
 			'append' => '',
 		),
+		array(
+			'key' => 'field_6761cd1950bdd',
+			'label' => 'blogs',
+			'name' => 'blogs',
+			'aria-label' => '',
+			'type' => 'taxonomy',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'taxonomy' => 'category',
+			'add_term' => 0,
+			'save_terms' => 0,
+			'load_terms' => 0,
+			'return_format' => 'id',
+			'field_type' => 'checkbox',
+			'allow_in_bindings' => 1,
+			'bidirectional' => 0,
+			'multiple' => 0,
+			'allow_null' => 0,
+			'bidirectional_target' => array(
+			),
+		),
 	),
 	'location' => array(
 		array(
@@ -82,33 +109,79 @@ add_action( 'acf/include_fields', function() {
 	'description' => '',
 	'show_in_rest' => 0,
 ) );
+
+	acf_add_local_field_group( array(
+	'key' => 'group_6761d270e5e87',
+	'title' => 'restricted blogs',
+	'fields' => array(
+		array(
+			'key' => 'field_6761d27255db8',
+			'label' => 'restricted',
+			'name' => 'restricted',
+			'aria-label' => '',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+			'allow_in_bindings' => 0,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+			'ui' => 1,
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'taxonomy',
+				'operator' => '==',
+				'value' => 'category',
+			),
+		),
+	),
+	'menu_order' => 1,
+	'position' => 'normal',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+	'show_in_rest' => 0,
+) );
 } );
 
 add_action( 'init', function() {
 	register_post_type( 'box', array(
 	'labels' => array(
-		'name' => 'Boxar ',
+		'name' => 'boxer',
 		'singular_name' => 'box',
-		'menu_name' => 'Boxar ',
-		'all_items' => 'All Boxar ',
+		'menu_name' => 'Boxar',
+		'all_items' => 'All Boxar',
 		'edit_item' => 'Edit box',
 		'view_item' => 'View box',
-		'view_items' => 'View Boxar ',
+		'view_items' => 'View Boxar',
 		'add_new_item' => 'Add New box',
 		'add_new' => 'Add New box',
 		'new_item' => 'New box',
 		'parent_item_colon' => 'Parent box:',
-		'search_items' => 'Search Boxar ',
-		'not_found' => 'No Boxar	found',
-		'not_found_in_trash' => 'No Boxar	found in Trash',
+		'search_items' => 'Search boxes ',
+		'not_found' => 'No boxes	found',
+		'not_found_in_trash' => 'No boxes	found in Trash',
 		'archives' => 'box Archives',
 		'attributes' => 'box Attributes',
 		'insert_into_item' => 'Insert into box',
 		'uploaded_to_this_item' => 'Uploaded to this box',
-		'filter_items_list' => 'Filter Boxar	list',
-		'filter_by_date' => 'Filter Boxar	by date',
-		'items_list_navigation' => 'Boxar	list navigation',
-		'items_list' => 'Boxar	list',
+		'filter_items_list' => 'Filter boxes	list',
+		'filter_by_date' => 'Filter boxes	by date',
+		'items_list_navigation' => 'boxes	list navigation',
+		'items_list' => 'boxes	list',
 		'item_published' => 'box published.',
 		'item_published_privately' => 'box published privately.',
 		'item_reverted_to_draft' => 'box reverted to draft.',
@@ -132,3 +205,6 @@ add_action( 'init', function() {
 	'delete_with_user' => false,
 ) );
 } );
+
+
+
