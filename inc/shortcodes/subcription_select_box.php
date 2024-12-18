@@ -49,6 +49,9 @@ function subcription_select_box() {
             
         <?php endif; ?>
 
+        <pre>
+            <?php print_r($subcription) ?>
+        </pre>
        
 
     </div>

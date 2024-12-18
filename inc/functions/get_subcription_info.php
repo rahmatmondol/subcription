@@ -23,20 +23,24 @@ function get_user_subscriptions() {
         return false;
     }
 
-    // return $orders;
+
+//     	return $orders;
 
     // Loop through orders to retrieve subscription data
     foreach ( $orders as $order ) {
         $order_id = $order->get_id();
 
         $have_subscription = $order->get_meta( 'wps_sfw_order_has_subscription' );
-        // Skip if the order is not a subscription
-        if ( ! $have_subscription ) {
+		
+         // Skip if the order is not a subscription
+        if (  !$have_subscription ) {
             continue;
         }
-
+		
         // Retrieve subscription ID from the order meta
-        $subscription_id = $order->get_meta( 'wps_sfw_subscription_id' );
+        $subscription_id = $order->get_meta( 'wps_subscription_id' );
+		
+		
         // Retrieve subscription meta data
         $subscription_status = wps_sfw_get_meta_data( $subscription_id, 'wps_subscription_status', true );
         $product_id          = wps_sfw_get_meta_data( $subscription_id, 'product_id', true );

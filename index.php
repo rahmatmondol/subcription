@@ -3,7 +3,7 @@
 Plugin Name: Subscription Manager
 Plugin URI: 
 Description: This plugin is for Subscription Boxes management system
-Version: 1.3 
+Version: 1.3.2 
 Author: Leadcom
 Author URI: http://leadcom.io
 */
@@ -52,3 +52,16 @@ function wps_sfw_activation_failure_admin_notice() {
     }
 }
 
+add_action( 'admin_enqueue_scripts', function( $hook ) {
+    // Only enqueue on the product editor page.
+    if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
+        return;
+    }
+
+    // Enqueue the script only for the product post type.
+    $screen = get_current_screen();
+    if ( $screen->post_type === 'product' ) {
+        wp_enqueue_script( 'custom-acf-toggle', plugins_url( 'assets/js/custom-acf-toggle.js', __FILE__ ), array( 'jquery' ), null, true );
+        // wp_enqueue_script( 'custom-acf-toggle', get_template_directory_uri() . 'assets/js/custom-acf-toggle.js', array( 'jquery' ), '1.0', true );
+    }
+} );
