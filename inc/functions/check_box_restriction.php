@@ -26,12 +26,6 @@ function display_single_post_id_in_header() {
         $subscription = get_user_subscriptions();
         $user_boxes = json_decode( get_user_meta( $user->ID, 'active_boxes', true ), true ) ?: array();
 
-        wp_die(
-            __( 'You do not have an active subscription.', 'subscription-Manager' ),
-            __( 'Access Denied', 'subscription-Manager' ),
-            array( 'response' => 403 )
-        );
-
         // Handle no subscription
         if ( ! $subscription ) {
             wp_die(
@@ -55,7 +49,7 @@ function display_single_post_id_in_header() {
 
         // Check if the current post ID is in the user's active boxes
         $post_id = get_the_ID();
-        if ( ! in_array( $post_id, $user_boxes, true ) ) {
+        if ( ! in_array( $post_id, $user_boxes ) ) {
             wp_die(
                 __( 'You do not have access to this box.', 'subscription-Manager' ),
                 __( 'Access Denied', 'subscription-Manager' ),
